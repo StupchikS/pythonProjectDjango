@@ -1,0 +1,17 @@
+body{
+    background: lightyellow;
+    font-family: Verdana;
+}
+.container{
+    width: 400px;
+    margin: 0 auto;
+}
+.container h1{
+    text-align: center;
+}
+.container form, .container h2, .container h1, .container p{
+    background: lightgreen;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 16px;
+}

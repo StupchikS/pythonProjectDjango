@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="div_about">
+
+    <h1>Описание программы</h1>
+    <p>Вашему вниманию представлена программа генерации пароля,
+        На главной странице необходимо выбрать длину пароля, по умолчанию 12.
+        По умолчанию пароль состоит из прописных букв английского алфавита,
+        можно выбрать наличие цифр, заглавных букв и спецсимволов.</p>
+    <h2>Автор</h2>
+    <p class="author">Ступчик Сергей</p>
+
+
+</div>
+<div class="a_about">
+ <p><a href="{% url 'mainpage' %}">Вернуться на главную</a> </p>
+</div>
+</body>
+</html>

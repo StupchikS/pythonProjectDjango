@@ -1,0 +1,35 @@
+body{
+    background: lightyellow;
+    font-family: Verdana;
+}
+.container{
+    width: 400px;
+    margin: 0 auto;
+}
+.container h1{
+    text-align: center;
+}
+.container form, .container h2{
+    background: lightgreen;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 16px;
+}
+.div_about{
+    background: lightcoral;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 16px;
+    width: 800px;
+    margin: 0 auto;
+
+}
+.div_about h1, .div_about h2{
+    text-align: center;
+}
+.author{
+    text-align: right;
+}
+.a_about{
+    text-align: center;
+}
