@@ -7,8 +7,8 @@
 <div class="element">
     <h2 class="top"><a href="{% url 'blog:detail' blog.id %}">{{ blog.title }}</a></h2>
     <div class="blog_text">
-        <h5>{{ blog.date|date:'d.m.Y' }}</h5>
-        <p>{{ blog.description|striptags|truncatechars:360 }}</p>
+        <h5>{{ blog.date|date:'j E Y' }}</h5>
+        <p>{{ blog.description|truncatechars:360 }}</p>
     </div>
 </div>
 {% endfor %}
