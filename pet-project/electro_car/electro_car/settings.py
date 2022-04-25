@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'electric_car_dir.apps.ElectricCarDirConfig',
+    'blog.apps.BlogConfig',
 ]
 
 MIDDLEWARE = [
