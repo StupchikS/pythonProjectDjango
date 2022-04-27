@@ -15,7 +15,7 @@
             <li>
                 <form action="{% url 'logoutuser' %}" method="post">
                     {% csrf_token %}
-                    <button class="top">Exit</button>
+                    <button class="top">Выход</button>
                 </form></li>
 
         </ul>
@@ -25,8 +25,8 @@
 <div class="menu_user">
     <div class="wrap">
         <ul>
-            <li><a href="{% url 'signupuser' %}">Registration</a></li>
-            <li><a href="{% url 'loginuser' %}">Enter</a></li>
+            <li><a href="{% url 'signupuser' %}">Регистрация</a></li>
+            <li><a href="{% url 'loginuser' %}">Вход</a></li>
         </ul>
     </div>
 </div>

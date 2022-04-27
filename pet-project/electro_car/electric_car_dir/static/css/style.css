@@ -102,3 +102,19 @@ body{
 .menu li{
     margin-left: 40px;
 }
+.menu_user{
+    background: blue;
+    box-shadow: 0 2px 12px 2px #003366;
+}
+
+
+.menu_user ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+}
+.menu_user a{
+    color: #fff;
+    text-decoration: none;
+}
