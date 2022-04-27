@@ -7,6 +7,30 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+{% if user.is_authenticated %}
+<div class="menu_user">
+    <div class="wrap">
+        <ul>
+            <li class="log">Пользователь: {{ user.username }}</li>
+            <li>
+                <form action="{% url 'logoutuser' %}" method="post">
+                    {% csrf_token %}
+                    <button class="top">Exit</button>
+                </form></li>
+
+        </ul>
+   </div>
+</div>
+{% else %}
+<div class="menu_user">
+    <div class="wrap">
+        <ul>
+            <li><a href="{% url 'signupuser' %}">Registration</a></li>
+            <li><a href="{% url 'loginuser' %}">Enter</a></li>
+        </ul>
+    </div>
+</div>
+{% endif %}
 <div class="menu">
     <div class="wrap">
         <div class="logo">
