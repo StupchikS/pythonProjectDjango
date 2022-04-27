@@ -1,0 +1,29 @@
+.body{
+    padding: 0%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.wrap{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 30px;
+    box-sizing: border-box;
+}
+.menu{
+    background: blue;
+    box-shadow: 0 2px 12px 2px #003366;
+}
+ul{
+    list-style: none;
+    padding: 0;
+}
+.menu ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+}
+.menu a{
+    color: #fff;
+    text-decoration: none;
+}
