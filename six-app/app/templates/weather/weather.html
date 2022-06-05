@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="wrap">
+    <div class="block">
+        <div class="elem">
+            <h2>Weather in your city</h2>
+            <form action="">
+                <input type="text" name="city" placeholder="Enter city" class="city">
+                <br>
+                <input type="submit" name="send" value="Узнать" class="but">
+            </form>
+        </div>
+        <div class="elem">
+            <h2>Information</h2>
+            <div class="info">
+                <p class="data">
+                    <b>City: <br> <br></b>
+                    <b>Temperatura</b>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
