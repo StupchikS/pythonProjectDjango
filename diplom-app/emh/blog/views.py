@@ -10,6 +10,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
+from crm.models import Order
+from telebot.sendmessage import send_telegram
 
 
 class BlogHome(DataMixin, ListView):
@@ -20,14 +22,12 @@ class BlogHome(DataMixin, ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context['title'] = 'Главная страница'  #  MIXIN
-        # context['cat_selected'] = 0  # по умолчанию не одна категормя не выделена
-        # context['menu'] = menu
+
         c_def = self.get_user_context(title='Главная страница')
         return dict(list(context.items()) + list(c_def.items()))
 
     def get_queryset(self):
-        return Blog.objects.filter(is_published=True).select_related('cat')
+        return Blog.objects.filter(is_published=True)
 
 
 class ShowPost(DataMixin, DetailView):
@@ -44,25 +44,6 @@ class ShowPost(DataMixin, DetailView):
         return dict(list(context.items()) + list(c_def.items()))
 
 
-class BlogCategory(DataMixin, ListView):
-    model = Blog
-    template_name = 'blog/index.html'
-    context_object_name = 'posts'
-    allow_empty = False  # пустые категории не выдает синтаксис ошибку
-
-    def get_queryset(self):
-        return Blog.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True).select_related('cat')
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # context['title'] = 'Категория - ' + str(context['posts'][0].cat)
-        # context['cat_selected'] = context['posts'][0].cat_id  # выделенная
-        # context['menu'] = menu
-        c = Category.objects.get(slug=self.kwargs['cat_slug'])
-        c_def = self.get_user_context(title='Категория - ' + str(c.name), cat_selected=c.pk)
-        return dict(list(context.items()) + list(c_def.items()))
-
-
 class AddPage(LoginRequiredMixin, DataMixin, CreateView):
     form_class = AddPostForm
     template_name = 'blog/addpage.html'
@@ -71,30 +52,26 @@ class AddPage(LoginRequiredMixin, DataMixin, CreateView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context['title'] = 'Добавить статью'
-        #
-        # context['menu'] = menu
         c_def = self.get_user_context(title='Добавить статью')
         return dict(list(context.items()) + list(c_def.items()))
 
 
-class RegisterUser(DataMixin, CreateView):
-    # form_class = UserCreationForm  # стандартная но не красивая форма
-    form_class = RegisterUserForm
-    template_name = 'blog/register.html'
-    success_url = reverse_lazy('login')
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title='Регистрация')
-        return dict(list(context.items()) + list(c_def.items()))
-
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return redirect('index')
-
-
+# class RegisterUser(DataMixin, CreateView):
+#     form_class = RegisterUserForm
+#     template_name = 'blog/register.html'
+#     success_url = reverse_lazy('login')
+#
+#     def get_context_data(self, *, object_list=None, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         c_def = self.get_user_context(title='Регистрация')
+#         return dict(list(context.items()) + list(c_def.items()))
+#
+#     def form_valid(self, form):
+#         user = form.save()
+#         login(self.request, user)
+#         return redirect('index')
+#
+#
 class LoginUser(DataMixin, LoginView):
     form_class = AuthenticationForm
     template_name = 'blog/login.html'
@@ -129,3 +106,15 @@ class ContactFormView(DataMixin, FormView):
         except BadHeaderError:
             return HttpResponse('Найден некорректный заголовок')
         return redirect('index')
+
+
+def thanks_page(request):
+    if request.POST:
+        name = request.POST['name']
+        phone = request.POST['phone']
+        element = Order(order_name=name, order_phone=phone)
+        element.save()
+        send_telegram(tg_name=name, tg_phone=phone)
+        return render(request, 'blog/thanks.html', {'name': name})
+    else:
+        return render(request, 'blog/thanks.html')
