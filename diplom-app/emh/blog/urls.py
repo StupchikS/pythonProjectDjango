@@ -12,10 +12,10 @@ urlpatterns = [
 
 
     path('addpage/', AddPage.as_view(), name='add_page'),
-    path('login/', LoginUser.as_view(), name='login'),
+    # path('login/', LoginUser.as_view(), name='login'),
 
     path('logout/', auth_views.LogoutView.as_view(template_name='blog/logout.html'), name='logout'),
-    path('contact/', ContactFormView.as_view(), name='contact'),
+    path('contact/', contact_page, name='contact'),
     path('thanks/', thanks_page, name='thanks_page')
 
 ]

@@ -12,6 +12,7 @@ from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from crm.models import Order
 from telebot.sendmessage import send_telegram
+from crm.forms import OrderForm
 
 
 class BlogHome(DataMixin, ListView):
@@ -71,48 +72,61 @@ class AddPage(LoginRequiredMixin, DataMixin, CreateView):
 #         login(self.request, user)
 #         return redirect('index')
 #
+# #
+# class LoginUser(DataMixin, LoginView):
+#     form_class = AuthenticationForm
+#     template_name = 'blog/login.html'
 #
-class LoginUser(DataMixin, LoginView):
-    form_class = AuthenticationForm
-    template_name = 'blog/login.html'
+#     def get_context_data(self, *, object_list=None, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         c_def = self.get_user_context(title='Авторизация')
+#         return dict(list(context.items()) + list(c_def.items()))
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title='Авторизация')
-        return dict(list(context.items()) + list(c_def.items()))
+#
+# class ContactFormView(DataMixin, FormView):
+#     form_class = ContactForm
+#     template_name = 'blog/contact.html'
+#     success_url = reverse_lazy('index')  # заполнили форму связи и куда далее
+#
+#     def get_context_data(self, *, object_list=None, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         c_def = self.get_user_context(title='Обратная связь')
+#         return dict(list(context.items()) + list(c_def.items()))
+#
+#     def form_valid(self, form):
+#         print(form.cleaned_data)  # временное решение, соберет заполненные данные
+#         subject = 'Message'
+#         body = {
+#             'name': form.cleaned_data['name'],
+#             'email': form.cleaned_data['email'],
+#             'content': form.cleaned_data['content'],
+#         }
+#         message = '\n'.join(body.values())
+#         try:
+#             send_mail(subject, message, form.cleaned_data['email'], ['admin@log.ru'])
+#         except BadHeaderError:
+#             return HttpResponse('Найден некорректный заголовок')
+#         return redirect('index')
 
 
-class ContactFormView(DataMixin, FormView):
-    form_class = ContactForm
-    template_name = 'blog/contact.html'
-    success_url = reverse_lazy('index')  # заполнили форму связи и куда далее
+def contact_page(request):
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title='Обратная связь')
-        return dict(list(context.items()) + list(c_def.items()))
+    form = OrderForm()
 
-    def form_valid(self, form):
-        print(form.cleaned_data)  # временное решение, соберет заполненные данные
-        subject = 'Message'
-        body = {
-            'name': form.cleaned_data['name'],
-            'email': form.cleaned_data['email'],
-            'content': form.cleaned_data['content'],
-        }
-        message = '\n'.join(body.values())
-        try:
-            send_mail(subject, message, form.cleaned_data['email'], ['admin@log.ru'])
-        except BadHeaderError:
-            return HttpResponse('Найден некорректный заголовок')
-        return redirect('index')
+    dict_obj = {
+
+        'form': form,
+    }
+    return render(request, 'blog/contact.html', dict_obj)
 
 
 def thanks_page(request):
     if request.POST:
         name = request.POST['name']
         phone = request.POST['phone']
-        element = Order(order_name=name, order_phone=phone)
+        email = request.POST['email']
+        context = request.POST['context']
+        element = Order(order_name=name, order_phone=phone, order_email=email, order_context=context)
         element.save()
         send_telegram(tg_name=name, tg_phone=phone)
         return render(request, 'blog/thanks.html', {'name': name})
