@@ -47,3 +47,37 @@ class MedWork(models.Model):
         verbose_name = "Прием"
         verbose_name_plural = 'Приемы'
         ordering = ['-data_work']
+
+
+class Blood(models.Model):
+    patient_number = models.ForeignKey('Patient', on_delete=models.PROTECT, verbose_name='номер пациента')
+    data_work = models.DateField(verbose_name='дата приема анализа')
+    belock = models.CharField(max_length=10, verbose_name='белок')
+    hgb = models.CharField(max_length=10, verbose_name='ХГБ')
+    sugar = models.CharField(max_length=10, verbose_name='сахар')
+    text_blood = models.CharField(max_length=100, verbose_name='описание')
+
+    def __str__(self):
+        return self.data_work
+
+    class Meta:
+        verbose_name = "Анализ крови"
+        verbose_name_plural = 'Анализы крови'
+        ordering = ['-data_work']
+
+
+class Urea(models.Model):
+    patient_number = models.ForeignKey('Patient', on_delete=models.PROTECT, verbose_name='номер пациента')
+    data_work = models.DateField(verbose_name='дата приема анализа')
+    belock = models.CharField(max_length=10, verbose_name='белок')
+    sugar = models.CharField(max_length=10, verbose_name='сахар')
+    mochevina = models.CharField(max_length=10, verbose_name='мочевина')
+    text_urea = models.CharField(max_length=100, verbose_name='описание')
+
+    def __str__(self):
+        return self.data_work
+
+    class Meta:
+        verbose_name = "Анализ мочи"
+        verbose_name_plural = 'Анализы мочи'
+        ordering = ['-data_work']
