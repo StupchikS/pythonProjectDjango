@@ -41,7 +41,7 @@ class MedWork(models.Model):
     recomend_work = models.CharField(max_length=200, verbose_name='рекомендации')
 
     def __str__(self):
-        return self.data_work
+        return str(self.patient_number) + ' ' + str(self.data_work)
 
     class Meta:
         verbose_name = "Прием"
@@ -55,10 +55,10 @@ class Blood(models.Model):
     belock = models.CharField(max_length=10, verbose_name='белок')
     hgb = models.CharField(max_length=10, verbose_name='ХГБ')
     sugar = models.CharField(max_length=10, verbose_name='сахар')
-    text_blood = models.CharField(max_length=100, verbose_name='описание')
+    text_blood = models.CharField(max_length=100, blank=True, verbose_name='описание')
 
     def __str__(self):
-        return self.data_work
+        return str(self.patient_number) + ' ' + str(self.data_work)
 
     class Meta:
         verbose_name = "Анализ крови"
@@ -72,10 +72,10 @@ class Urea(models.Model):
     belock = models.CharField(max_length=10, verbose_name='белок')
     sugar = models.CharField(max_length=10, verbose_name='сахар')
     mochevina = models.CharField(max_length=10, verbose_name='мочевина')
-    text_urea = models.CharField(max_length=100, verbose_name='описание')
+    text_urea = models.CharField(max_length=100, blank=True, verbose_name='описание')
 
     def __str__(self):
-        return self.data_work
+        return str(self.patient_number) + ' ' + str(self.data_work)
 
     class Meta:
         verbose_name = "Анализ мочи"
