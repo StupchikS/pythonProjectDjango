@@ -16,9 +16,9 @@ class IndexAdminForm(forms.ModelForm):
 class IndexAdmin(admin.ModelAdmin):
     form = IndexAdminForm
 
-    list_display = ('id', 'get_html_photo', 'content')
+    list_display = ('id', 'get_html_photo', 'content', 'title')
     list_display_links = ('id', 'content')
-    fields = ('content', 'photo')
+    fields = ('content', 'photo', 'title')
     readonly_fields = ('get_html_photo',)
     save_on_top = True
 

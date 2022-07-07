@@ -24,12 +24,12 @@ class Blog(models.Model):
 
 
 class Index(models.Model):
-
-    content = models.TextField(blank=True, verbose_name="контент")
+    title = models.CharField(max_length=200, blank=True, verbose_name='Наименование больницы')
+    content = models.TextField(verbose_name="контент")
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/", blank=True, verbose_name="фото")
 
     def __str__(self):
-        return 'изменения внесены'
+        return self.title
 
     class Meta:
         verbose_name = "Настройка главной страницы"

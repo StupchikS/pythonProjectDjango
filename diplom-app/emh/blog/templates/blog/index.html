@@ -2,20 +2,18 @@
 {% block content %}
 {% load static %}
 <h1>{{ title }}</h1>
-<ul>
+{% for i in index %}
 
-    <li>
+
 
         <div class="text">
 
-            <img class="image" src="{{ index.photo.url }}">
+            <img class="image" src="{{ i.photo.url }}">
 
 
-        <p>{{ index.content|striptags }}</p>
+        <p>{{ i.content|striptags }}</p>
         </div>
 
-    </li>
-
-</ul>
+{% endfor %}
 
 {% endblock %}
