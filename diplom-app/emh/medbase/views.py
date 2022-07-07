@@ -1,7 +1,12 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
+from django.urls import reverse_lazy
+
 
 from emh.utils import DataMixin
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
+
+from .forms import GetInfoForm
 from .models import Personal
 
 
@@ -19,3 +24,25 @@ class Person(DataMixin, ListView):
 
     def get_queryset(self):
         return Personal.objects.all()
+
+
+def getinfo(request):
+    form = GetInfoForm()
+
+    dict_obj = {
+
+        'form': form,
+    }
+    return render(request, 'medbase/getinfo.html', dict_obj)
+
+
+def patient_info(request):
+    if request.POST:
+        number = request.POST['number']
+        birthday = request.POST['birthday']
+        oms = request.POST['oms']
+        return render(request, 'medbase/patient_info.html', {'name': number, 'birthday': birthday, 'oms': oms})
+    else:
+        return render(request, 'medbase/patient_info.html')
+
+

@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views  # используем уж
 
 import telebot
 from .views import *
-from medbase.views import Person
+from medbase.views import Person, getinfo, patient_info
 from telebot.views import *
 
 urlpatterns = [
@@ -13,7 +13,8 @@ urlpatterns = [
     path('posts/', BlogHome.as_view(), name='posts'),
 
 
-    # path('addpage/', AddPage.as_view(), name='add_page'),
+    path('getinfo/', getinfo, name='getinfo'),
+    path('patient_info/', patient_info, name='patient_info'),
     # path('login/', LoginUser.as_view(), name='login'),
 
     path('logout/', auth_views.LogoutView.as_view(template_name='blog/logout.html'), name='logout'),

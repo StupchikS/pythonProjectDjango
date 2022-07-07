@@ -64,7 +64,7 @@ class ShowPost(DataMixin, DetailView):
 
 class AddPage(LoginRequiredMixin, DataMixin, CreateView):
     form_class = AddPostForm
-    template_name = 'blog/addpage.html'
+    template_name = 'blog/getinfo.html'
     success_url = reverse_lazy('index')  # куда идти после успешного заполнения формы
     login_url = reverse_lazy('index')  # если пользователь не зарегился куда его
 

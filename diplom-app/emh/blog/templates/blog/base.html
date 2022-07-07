@@ -19,8 +19,8 @@
                 <li class="last"><a href="{% url 'admin:index' %}">Работа с ЭИБ</a></li>
                 <li class="last">{{ user.username }} | <a href="{% url 'logout' %}">Выйти</a></li>
                 {% else %}
+                <li class="last"><a href="{% url 'getinfo' %}">Узнать свои результаты</a></li>
                 <li class="last"><a href="{% url 'admin:index' %}">Вход для персонала</a></li>
-
                 {% endif %}
             </ul>
         </div>

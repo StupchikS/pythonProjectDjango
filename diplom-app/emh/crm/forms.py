@@ -6,3 +6,5 @@ class OrderForm(forms.Form):
     phone = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.EmailField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control'}))
     context = forms.CharField(max_length=500, widget=forms.Textarea(attrs={'class': 'form-control'}))
+
+
