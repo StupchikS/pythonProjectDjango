@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.views.generic import ListView, DetailView, CreateView, FormView
-from .utils import *  #  добавляем миксин, в классе идет первым
+from emh.utils import *  #  добавляем миксин, в классе идет первым
 from .models import *
 from .forms import *
 from django.urls import reverse_lazy  #  переадресация
@@ -15,16 +15,32 @@ from telebot.sendmessage import send_telegram
 from crm.forms import OrderForm
 
 
-class BlogHome(DataMixin, ListView):
-    paginate_by = 4  # из listview сколько отображать на странице
-    model = Blog
+class Index(DataMixin, ListView):
+
+    model = Index
     template_name = 'blog/index.html'
-    context_object_name = 'posts'
+    context_object_name = 'index'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
 
         c_def = self.get_user_context(title='Главная страница')
+        return dict(list(context.items()) + list(c_def.items()))
+
+    def get_queryset(self):
+        return Index.objects.all()
+
+
+class BlogHome(DataMixin, ListView):
+    paginate_by = 4  # из listview сколько отображать на странице
+    model = Blog
+    template_name = 'blog/posts.html'
+    context_object_name = 'posts'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        c_def = self.get_user_context(title='Новости больницы')
         return dict(list(context.items()) + list(c_def.items()))
 
     def get_queryset(self):

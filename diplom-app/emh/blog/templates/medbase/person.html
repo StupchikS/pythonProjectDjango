@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% load static %}
+<h1>{{ title }}</h1>
+<ul>
+    {% for p in person %}
+    <li>
+
+        <div class="text">
+            {% if p.photo %}
+            <img class="image" src="{{ p.photo.url }}">
+            {% else %}
+            <img src="{% static 'medbase/no_photo.jpeg' %}" class="image">
+            {% endif %}
+
+
+
+
+        </div>
+        <p>{{ p.stuff_name }}</p>
+        <p>{{ p.fio }}</p>
+        <p>{{ p.content }}</p>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

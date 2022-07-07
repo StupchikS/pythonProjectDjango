@@ -1,12 +1,31 @@
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django.contrib import admin
+from django.utils.safestring import mark_safe
+from django import forms
+from .models import Personal
+
 from .models import Personal, Blood, Urea, Patient, MedWork
 
 
+class PersonalAdminForm(forms.ModelForm):
+    content = forms.CharField(widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = Personal
+        fields = '__all__'
+
+
 class PersonalAdm(admin.ModelAdmin):
-    model = Personal
+    model = PersonalAdminForm
     list_display = ('id', 'stuff_name', 'fio', 'number_for', 'content', 'photo', 'number_for')
     list_display_links = ('stuff_name', 'fio',)
     search_fields = ('fio',)
+
+    def get_html_photo(self, object):
+        if object.photo:
+            return mark_safe(f'<img src="{object.photo.url}" width="50">')
+
+    get_html_photo.short_description = 'фотография если есть'
 
 
 class PatientAdm(admin.ModelAdmin):

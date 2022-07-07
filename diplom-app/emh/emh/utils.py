@@ -1,10 +1,12 @@
-from .models import *
+from blog.models import *
 from django.db.models import Count
 
 
 menu = [
-    {'title': "Добавить статью", 'url_name': 'add_page'},
+
     {'title': "Обратная связь", 'url_name': 'contact'},
+    {'title': "Новости Больницы", 'url_name': 'posts'},
+    {'title': "Администрация Больницы", 'url_name': 'person'},
 
 ]
 

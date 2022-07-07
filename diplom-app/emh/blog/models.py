@@ -23,3 +23,15 @@ class Blog(models.Model):
         ordering = ['-time_created']
 
 
+class Index(models.Model):
+
+    content = models.TextField(blank=True, verbose_name="контент")
+    photo = models.ImageField(upload_to="photos/%Y/%m/%d/", blank=True, verbose_name="фото")
+
+    def __str__(self):
+        return 'изменения внесены'
+
+    class Meta:
+        verbose_name = "Настройка главной страницы"
+        verbose_name_plural = 'Настройки главной страницы'
+

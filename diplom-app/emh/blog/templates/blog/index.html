@@ -3,21 +3,19 @@
 {% load static %}
 <h1>{{ title }}</h1>
 <ul>
-    {% for p in posts %}
+
     <li>
 
         <div class="text">
-            {% if p.photo %}
-            <img class="image" src="{{ p.photo.url }}">
-            {% else %}
-            <img src="{% static 'blog/default.jpg' %}" class="image">
-            {% endif %}
-        <h2><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></h2>
-        <p>{{ p.content|striptags|truncatewords:50 }}</p>
+
+            <img class="image" src="{{ index.photo.url }}">
+
+
+        <p>{{ index.content|striptags|truncatewords }}</p>
         </div>
-        <p class="date">Дата: {{ p.time_update|date:"d-m-Y H:i:s" }}</p>
+
     </li>
-    {% endfor %}
+
 </ul>
 
 {% endblock %}
