@@ -8,7 +8,7 @@ from medbase.views import Person
 from telebot.views import *
 
 urlpatterns = [
-    path('', Index.as_view(), name='index'),
+    path('', IndexHome.as_view(), name='index'),
     path('post/<slug:post_slug>/', ShowPost.as_view(), name='post'),
     path('posts/', BlogHome.as_view(), name='posts'),
 

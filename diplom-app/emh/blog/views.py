@@ -15,7 +15,7 @@ from telebot.sendmessage import send_telegram
 from crm.forms import OrderForm
 
 
-class Index(DataMixin, ListView):
+class IndexHome(DataMixin, ListView):
 
     model = Index
     template_name = 'blog/index.html'
