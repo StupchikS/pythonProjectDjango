@@ -18,7 +18,7 @@ class Personal(models.Model):
 
 
 class Patient(models.Model):
-    patient_number = models.CharField(max_length=150, verbose_name='номер пациента')
+    patient_number = models.CharField(max_length=150, unique=True, verbose_name='номер пациента')
     fio = models.CharField(max_length=100, verbose_name='ФИО')
     data_birthday = models.DateField(verbose_name='дата рождения')
     number_oms = models.CharField(max_length=40, verbose_name="номер полиса")
@@ -26,7 +26,7 @@ class Patient(models.Model):
     phone = models.CharField(max_length=200, verbose_name='телефон')
 
     def __str__(self):
-        return self.fio
+        return self.patient_number
 
     class Meta:
         verbose_name = "Пациента"

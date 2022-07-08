@@ -1,13 +1,16 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-<h1>{{ title }}</h1>
-<h2>fdghhmk</h2>
+<h1>Просмотр назначений и анализов</h1>
+
 <form action="{% url 'patient_info' %}" method="post" >
     {% csrf_token %}
     <div class="form-patient">
-        <input name="number" type="text"><br>
-        <input name="birthday" type="date"><br>
-        <input name="oms" type="text"><br>
+        введите ваш номер пациента<input name="number" type="text"><br>
+        <p>введите свою дату рождения<input name="birthday" type="date"></p><br>
+        <p>введите номер полиса омс<input name="oms" type="text"></p><br>
+        <input type="radio" name="select_bd" value="medwork">Информация о приеме<br>
+        <input type="radio" name="select_bd" value="blood">Анализ крови<br>
+        <input type="radio" name="select_bd" value="urea">Анализ мочи<br>
         <p><input type="submit" value="Выбрать">
             <input type="reset" value="Очистить"></p>
     </div>

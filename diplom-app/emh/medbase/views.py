@@ -2,16 +2,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 
-
 from emh.utils import DataMixin
 from django.views.generic import ListView, CreateView
 
 from .forms import GetInfoForm
-from .models import Personal
+from .models import *
 
 
 class Person(DataMixin, ListView):
-
     model = Personal
     template_name = 'medbase/person.html'
     context_object_name = 'person'
@@ -29,11 +27,12 @@ class Person(DataMixin, ListView):
 def getinfo(request):
     form = GetInfoForm()
 
-    dict_obj = {
-
-        'form': form,
-    }
-    return render(request, 'medbase/getinfo.html', dict_obj)
+    # dict_obj = {
+    #
+    #     'form': form,
+    # }
+    return render(request, 'medbase/getinfo.html',
+                  {'number': form['number'], 'birthday': form['birthday'], 'oms': form['oms']})
 
 
 def patient_info(request):
@@ -41,8 +40,34 @@ def patient_info(request):
         number = request.POST['number']
         birthday = request.POST['birthday']
         oms = request.POST['oms']
-        return render(request, 'medbase/patient_info.html', {'name': number, 'birthday': birthday, 'oms': oms})
+        select_bd = request.POST['select_bd']
+        patient = Patient.objects.filter(patient_number=number, number_oms=oms, data_birthday=birthday)
+        if patient:
+            if select_bd == "blood":
+                blood = Blood.objects.filter(patient_number=number)
+                return render(request, 'medbase/patient_info.html', {'title': f'Анализы крови пациента № {number}', 'blood': blood})
+            elif select_bd == "urea":
+                urea = Urea.objects.filter(patient_number=number)
+                return render(request, 'medbase/patient_info.html', {'title': f'Анализы мочи пациента № {number}', 'urea': urea})
+            elif select_bd == "medwork":
+                medwork = MedWork.objects.filter(patient_number=number)
+                return render(request, 'medbase/patient_info.html', {'title': f'Информация о приемах пациента № {number}', 'medwork': medwork})
+        else:
+            return render(request, 'medbase/patient_info.html', {'title': "Данные введены не правильно"})
+        # dict_form = {
+        #     'title': f'Информация о пациенте № {number}',
+        #     'select_bd': select_bd,
+        #     'name': number,
+        #     'birthday': birthday,
+        #     'oms': oms
+        # }
+        #
+        # return render(request, 'medbase/patient_info.html', dict_form)
+
     else:
-        return render(request, 'medbase/patient_info.html')
+        return render(request, 'medbase/getinfo.html')
+
+
+
 
 

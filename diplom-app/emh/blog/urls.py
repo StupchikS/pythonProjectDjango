@@ -15,6 +15,7 @@ urlpatterns = [
 
     path('getinfo/', getinfo, name='getinfo'),
     path('patient_info/', patient_info, name='patient_info'),
+
     # path('login/', LoginUser.as_view(), name='login'),
 
     path('logout/', auth_views.LogoutView.as_view(template_name='blog/logout.html'), name='logout'),

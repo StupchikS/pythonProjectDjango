@@ -62,16 +62,16 @@ class ShowPost(DataMixin, DetailView):
         return dict(list(context.items()) + list(c_def.items()))
 
 
-class AddPage(LoginRequiredMixin, DataMixin, CreateView):
-    form_class = AddPostForm
-    template_name = 'blog/getinfo.html'
-    success_url = reverse_lazy('index')  # куда идти после успешного заполнения формы
-    login_url = reverse_lazy('index')  # если пользователь не зарегился куда его
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title='Добавить статью')
-        return dict(list(context.items()) + list(c_def.items()))
+# class AddPage(LoginRequiredMixin, DataMixin, CreateView):
+#     form_class = AddPostForm
+#     template_name = 'blog/getinfo.html'
+#     success_url = reverse_lazy('index')  # куда идти после успешного заполнения формы
+#     login_url = reverse_lazy('index')  # если пользователь не зарегился куда его
+#
+#     def get_context_data(self, *, object_list=None, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         c_def = self.get_user_context(title='Добавить статью')
+#         return dict(list(context.items()) + list(c_def.items()))
 
 
 # class RegisterUser(DataMixin, CreateView):
