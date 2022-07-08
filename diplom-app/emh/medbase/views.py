@@ -45,11 +45,7 @@ def patient_info(request):
         if patient:
             if select_bd == "blood":
                 blood = Blood.objects.all()
-                if blood:
-                    return render(request, 'medbase/patient_info.html', {'title': f'Анализы крови пациента № {number}', 'blood': blood, 'number': number})
-                else:
-                    return render(request, 'medbase/patient_info.html',
-                                  {'title': f'Анализы крови пациента чето не так№ {number}'})
+                return render(request, 'medbase/patient_info.html', {'title': f'Анализы крови пациента № {number}', 'blood': blood, 'patient': patient})
             elif select_bd == "urea":
                 urea = Urea.objects.filter(patient_number=number)
                 return render(request, 'medbase/patient_info.html', {'title': f'Анализы мочи пациента № {number}', 'urea': urea})

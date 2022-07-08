@@ -15,6 +15,7 @@
                 <td>Диагноз</td>
             </tr>
             {% for i in blood %}
+            {% if i.patient_number in patient %}
             <tr>
 
                 <td>{{ i.patient_number }}</td>
@@ -25,7 +26,7 @@
                 <td>{{ i.text_blood }}</td>
 
             </tr>
-
+            {% endif %}
             {% endfor %}
             {% endif %}
 
