@@ -2,6 +2,34 @@
 {% block content %}
 {% load static %}
 <h1>{{ title }}</h1>
+<div class="table">
+    <table>
 
+            {% if blood %}
+            <tr>
+                <td>Номер пациента</td>
+                <td>Дата Анализа</td>
+                <td>Белок</td>
+                <td>ХГБ</td>
+                <td>Сахар</td>
+                <td>Диагноз</td>
+            </tr>
+            {% for i in blood %}
+            <tr>
+
+                <td>{{ i.patient_number }}</td>
+                <td>{{ i.data_work }}</td>
+                <td>{{ i.belock }}</td>
+                <td>{{ i.hgb }}</td>
+                <td>{{ i.sugar }}</td>
+                <td>{{ i.text_blood }}</td>
+
+            </tr>
+
+            {% endfor %}
+            {% endif %}
+
+    </table>
+</div>
 
 {% endblock %}
