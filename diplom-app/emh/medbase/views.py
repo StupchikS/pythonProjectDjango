@@ -45,13 +45,17 @@ def patient_info(request):
         if patient:
             if select_bd == "blood":
                 blood = Blood.objects.all()
-                return render(request, 'medbase/patient_info.html', {'title': f'Анализы крови пациента № {number}', 'blood': blood, 'patient': patient})
+                return render(request, 'medbase/patient_info.html',
+                              {'title': f'Анализы крови пациента № {number}', 'blood': blood, 'patient': patient})
             elif select_bd == "urea":
-                urea = Urea.objects.filter(patient_number=number)
-                return render(request, 'medbase/patient_info.html', {'title': f'Анализы мочи пациента № {number}', 'urea': urea})
+                urea = Urea.objects.all()
+                return render(request, 'medbase/patient_info.html',
+                              {'title': f'Анализы мочи пациента № {number}', 'urea': urea, 'patient': patient})
             elif select_bd == "medwork":
-                medwork = MedWork.objects.filter(patient_number=number)
-                return render(request, 'medbase/patient_info.html', {'title': f'Информация о приемах пациента № {number}', 'medwork': medwork})
+                medwork = MedWork.objects.all()
+                return render(request, 'medbase/patient_info.html',
+                              {'title': f'Информация о приемах пациента № {number}', 'medwork': medwork,
+                               'patient': patient})
         else:
             return render(request, 'medbase/patient_info.html', {'title': "Данные введены не правильно"})
         # dict_form = {
@@ -66,8 +70,3 @@ def patient_info(request):
 
     else:
         return render(request, 'medbase/getinfo.html')
-
-
-
-
-

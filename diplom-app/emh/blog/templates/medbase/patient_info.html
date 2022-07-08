@@ -17,7 +17,6 @@
             {% for i in blood %}
             {% if i.patient_number in patient %}
             <tr>
-
                 <td>{{ i.patient_number }}</td>
                 <td>{{ i.data_work }}</td>
                 <td>{{ i.belock }}</td>
@@ -25,6 +24,49 @@
                 <td>{{ i.sugar }}</td>
                 <td>{{ i.text_blood }}</td>
 
+            </tr>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+            {% if urea %}
+            <tr>
+                <td>Номер пациента</td>
+                <td>Дата Анализа</td>
+                <td>Белок</td>
+                <td>Мочевина</td>
+                <td>Сахар</td>
+                <td>Диагноз</td>
+            </tr>
+            {% for i in blood %}
+            {% if i.patient_number in patient %}
+            <tr>
+                <td>{{ i.patient_number }}</td>
+                <td>{{ i.data_work }}</td>
+                <td>{{ i.belock }}</td>
+                <td>{{ i.mochevina }}</td>
+                <td>{{ i.sugar }}</td>
+                <td>{{ i.text_urea }}</td>
+
+            </tr>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+            {% if medwork %}
+            <tr>
+                <td>Номер пациента</td>
+                <td>Дата приема</td>
+                <td>Результат приема</td>
+                <td>Рекомендации</td>
+            </tr>
+            {% for i in medwork %}
+            {% if i.patient_number in patient %}
+            <tr>
+                <td>{{ i.patient_number }}</td>
+                <td>{{ i.data_work }}</td>
+                <td>{{ i.content_work }}</td>
+                <td>{{ i.recomend_work }}</td>
             </tr>
             {% endif %}
             {% endfor %}
