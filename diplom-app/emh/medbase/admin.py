@@ -15,6 +15,22 @@ class PersonalAdminForm(forms.ModelForm):
         fields = '__all__'
 
 
+class PatientAdminForm(forms.ModelForm):
+    content = forms.CharField(widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = Patient
+        fields = '__all__'
+
+
+class MedWorkAdminForm(forms.ModelForm):
+    content = forms.CharField(widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = MedWork
+        fields = '__all__'
+
+
 class PersonalAdm(admin.ModelAdmin):
     model = PersonalAdminForm
     list_display = ('id', 'stuff_name', 'fio', 'number_for', 'content', 'photo', 'number_for')
@@ -29,14 +45,14 @@ class PersonalAdm(admin.ModelAdmin):
 
 
 class PatientAdm(admin.ModelAdmin):
-    model = Patient
+    model = PatientAdminForm
     list_display = ('id', 'patient_number', 'fio', 'data_birthday', 'number_oms', 'adres', 'phone')
     list_display_links = ('patient_number', 'fio')
     search_fields = ('patient_number', 'fio')
 
 
 class MedWorkAdm(admin.ModelAdmin):
-    model = MedWork
+    model = MedWorkAdminForm
     list_display = ('patient_number', 'data_work', 'content_work', 'recomend_work')
     list_display_links = ('patient_number', 'data_work')
     search_fields = ('patient_number',)
