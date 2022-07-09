@@ -8,9 +8,9 @@
 
         <div class="text">
             {% if p.photo %}
-            <img class="image" src="{{ p.photo.url }}">
+            <img class="imagepost" src="{{ p.photo.url }}">
             {% else %}
-            <img src="{% static 'blog/default.jpg' %}" class="image">
+            <img class="imagepost" src="{% static 'blog/default.jpg' %}">
             {% endif %}
         <h2><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></h2>
         <p>{{ p.content|striptags|truncatewords:50 }}</p>

@@ -1,8 +1,11 @@
 {% extends 'blog/base.html' %}
 {% block content %}
 {% load static %}
-<h1>{{ title }}</h1>
+<div class="nameheader">
+    <h1>{{ title }}</h1>
+</div>
 <div class="table">
+
     <table>
 
             {% if blood %}
@@ -13,6 +16,14 @@
                 <td>ХГБ</td>
                 <td>Сахар</td>
                 <td>Диагноз</td>
+            </tr>
+            <tr>
+                 <td>        </td>
+                 <td>        </td>
+                 <td>        </td>
+                 <td>        </td>
+                 <td>        </td>
+                 <td>        </td>
             </tr>
             {% for i in blood %}
             {% if i.patient_number in patient %}
@@ -38,6 +49,14 @@
                 <td>Сахар</td>
                 <td>Диагноз</td>
             </tr>
+            <tr>
+                 <td>        </td>
+                 <td>        </td>
+                 <td>        </td>
+                 <td>        </td>
+                 <td>        </td>
+                 <td>        </td>
+            </tr>
             {% for i in urea %}
             {% if i.patient_number in patient %}
             <tr>
@@ -49,6 +68,7 @@
                 <td>{{ i.text_urea }}</td>
 
             </tr>
+
             {% endif %}
             {% endfor %}
             {% endif %}
@@ -59,6 +79,12 @@
                 <td>Дата приема</td>
                 <td>Результат приема</td>
                 <td>Рекомендации</td>
+            </tr>
+            <tr>
+                 <td>        </td>
+                 <td>        </td>
+                 <td>        </td>
+                 <td>        </td>
             </tr>
             {% for i in medwork %}
             {% if i.patient_number in patient %}

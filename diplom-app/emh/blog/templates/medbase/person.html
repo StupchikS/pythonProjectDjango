@@ -8,9 +8,9 @@
 
         <div class="text">
             {% if p.photo %}
-            <img class="image" src="{{ p.photo.url }}">
+            <img class="imagepost" src="{{ p.photo.url }}">
             {% else %}
-            <img src="{% static 'medbase/no_photo.jpeg' %}" class="image">
+            <img src="{% static 'medbase/no_photo.jpeg' %}" class="imagepost">
             {% endif %}
 
 
