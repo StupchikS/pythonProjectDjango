@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Personal(models.Model):
+class Personal(models.Model):  #  модель персонала для отображения в администации больницы
     stuff_name = models.CharField(max_length=150, verbose_name='должность')
     fio = models.CharField(max_length=100, verbose_name='ФИО')
     content = models.TextField(blank=True, verbose_name="описание")
@@ -17,7 +17,7 @@ class Personal(models.Model):
         ordering = ['number_for']
 
 
-class Patient(models.Model):
+class Patient(models.Model):  #  модель анкетных данных пациента
     patient_number = models.CharField(max_length=150, unique=True, verbose_name='номер пациента')
     fio = models.CharField(max_length=100, verbose_name='ФИО')
     data_birthday = models.DateField(verbose_name='дата рождения')
@@ -34,7 +34,7 @@ class Patient(models.Model):
         ordering = ['fio']
 
 
-class MedWork(models.Model):
+class MedWork(models.Model):  #  модель приема врача
     patient_number = models.ForeignKey('Patient', on_delete=models.PROTECT, verbose_name='номер пациента')
     data_work = models.DateField(verbose_name='дата приема')
     content_work = models.TextField(max_length=1000, verbose_name='описание приема')
@@ -49,7 +49,7 @@ class MedWork(models.Model):
         ordering = ['-data_work']
 
 
-class Blood(models.Model):
+class Blood(models.Model):  # модель анализы крови
     patient_number = models.ForeignKey('Patient', on_delete=models.PROTECT, verbose_name='номер пациента')
     data_work = models.DateField(verbose_name='дата приема анализа')
     belock = models.CharField(max_length=10, verbose_name='белок')
@@ -66,7 +66,7 @@ class Blood(models.Model):
         ordering = ['-data_work']
 
 
-class Urea(models.Model):
+class Urea(models.Model):  # анализы мочи модель
     patient_number = models.ForeignKey('Patient', on_delete=models.PROTECT, verbose_name='номер пациента')
     data_work = models.DateField(verbose_name='дата приема анализа')
     belock = models.CharField(max_length=10, verbose_name='белок')

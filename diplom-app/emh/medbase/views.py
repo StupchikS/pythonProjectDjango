@@ -1,15 +1,15 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.shortcuts import render
-from django.urls import reverse_lazy
+
 
 from emh.utils import DataMixin
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView
 
 from .forms import GetInfoForm
 from .models import *
 
 
-class Person(DataMixin, ListView):
+class Person(DataMixin, ListView):  #  обрабатывает запрос по администрации больницы, выводит данные
     model = Personal
     template_name = 'medbase/person.html'
     context_object_name = 'person'
@@ -35,7 +35,7 @@ def getinfo(request):
                   {'number': form['number'], 'birthday': form['birthday'], 'oms': form['oms']})
 
 
-def patient_info(request):
+def patient_info(request):  #  получает данные от пациента и передает на форму с отображением
     if request.POST:
         number = request.POST['number']
         birthday = request.POST['birthday']

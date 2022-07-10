@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 
 
-class Blog(models.Model):
+class Blog(models.Model):  #  модель данных о новостях больницы
     title = models.CharField(max_length=255, verbose_name='название')
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="урл")
     content = models.TextField(blank=True, verbose_name="контент")
@@ -23,7 +23,7 @@ class Blog(models.Model):
         ordering = ['-time_created']
 
 
-class Index(models.Model):
+class Index(models.Model):  #  модель данных о больнице
     title = models.CharField(max_length=200, blank=True, verbose_name='Наименование больницы')
     content = models.TextField(verbose_name="контент")
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/", blank=True, verbose_name="фото")

@@ -2,7 +2,7 @@ import requests
 from .models import TeleSettings
 
 
-def send_telegram(tg_name, tg_phone):
+def send_telegram(tg_name, tg_phone):  #  функция отправки телебот сообщений
     if TeleSettings.objects.get(pk=1):
         settings = TeleSettings.objects.get(pk=1)
         token = str(settings.tg_token)

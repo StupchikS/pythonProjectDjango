@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class StatusCrm(models.Model):  # статус заявки
+class StatusCrm(models.Model):  # статус заявки модель
     status_name = models.CharField(max_length=200, verbose_name='Название статуса обращения')
 
     def __str__(self):
@@ -12,7 +12,7 @@ class StatusCrm(models.Model):  # статус заявки
         verbose_name_plural = 'Статусы обращений'
 
 
-class Order(models.Model):  # Заказы
+class Order(models.Model):  # Заявки модель
     order_dt = models.DateTimeField(auto_now=True, verbose_name='Дата создания')
     order_name = models.CharField(max_length=200, verbose_name='Имя')
     order_phone = models.CharField(max_length=11, verbose_name='Телефон')
@@ -28,7 +28,7 @@ class Order(models.Model):  # Заказы
         verbose_name_plural = 'Обращения'
 
 
-class CommentsCrm(models.Model):
+class CommentsCrm(models.Model):  #  модель комментов на заявки
     comment_binding = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Заявка')
     comment_text = models.TextField(verbose_name='Текст коментария')
     comment_dt = models.DateTimeField(auto_now=True, verbose_name='Дата коментария')
